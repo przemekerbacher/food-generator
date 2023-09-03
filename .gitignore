@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/FoodGenerator/bin/Debug/net7.0
+/FoodGenerator/obj
+/FoodGenerator/FoodGenerator.csproj.user
+/FoodGenerator/wwwroot/client-app/node_modules

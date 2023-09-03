@@ -1,0 +1,16 @@
+{
+    "baseUrl":"/",
+    "apiController": "api",
+    "foods": {
+        "create": "createFood",
+        "read": "readFoods",
+        "update": "updateFood",
+        "delete": "deleteFood"
+    },
+    "ingredients": {
+        "create": "createIngredient",
+        "read": "readIngredients",
+        "update": "updateIngredient",
+        "delete": "deleteIngredient"
+    }
+}
