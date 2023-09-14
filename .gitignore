@@ -7,3 +7,7 @@
 /FoodGenerator/obj
 /FoodGenerator/FoodGenerator.csproj.user
 /FoodGenerator/wwwroot/client-app/node_modules
+/FoodGenerator/bin/Release/net7.0
+/FoodGenerator/Properties/PublishProfiles
+/FoodGenerator/Properties
+/FoodGenerator/wwwroot/client-app/package-lock.json

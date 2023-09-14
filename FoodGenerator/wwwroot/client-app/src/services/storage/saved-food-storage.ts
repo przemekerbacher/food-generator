@@ -6,7 +6,7 @@ class SavedFoodStorage {
   api: Axios;
   constructor() {
     this.api = axios.create({
-      baseURL: `https://localhost:44331/api`,
+      baseURL: `/api`,
     });
   }
   async read(startDate: Date, endDate: Date) {

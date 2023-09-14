@@ -119,12 +119,12 @@ class FoodGenerator {
 
         if (!cell.food) {
           //get random food
-          const randomFood = this.getRandomFood(
-            food.filter((i) => i.type === row.type),
-            currentCells
-              .filter((i) => i.food !== null)
-              .map((i) => i.food) as Food[]
-          );
+          const all = food.filter((i) => i.type === row.type);
+          const existing = currentCells
+            .filter((i) => i.food !== null)
+            .map((i) => i.food) as Food[];
+
+          const randomFood = this.getRandomFood(all, existing);
           //fill for future days
           const endIndex = cellIndex + randomFood.daysCount - 1;
           for (
@@ -141,15 +141,31 @@ class FoodGenerator {
   }
 
   getRandomFood(allItems: Food[], existing: Food[]) {
-    var currentItems = allItems;
-    if (allItems.length > existing.length) {
-      currentItems = getMissingElements(
-        allItems,
-        existing.filter((i) => Boolean(i)) as Array<Food>
-      );
+    var possibleToChoose = excludeExising(allItems, existing);
+
+    if (possibleToChoose.length === 0) {
+      possibleToChoose = allItems;
     }
-    const randomIndex = Math.floor(Math.random() * currentItems.length);
-    return currentItems[randomIndex];
+
+    const randomIndex = Math.floor(Math.random() * possibleToChoose.length);
+
+    function excludeExising(all: Food[], existing: Food[]): Food[] {
+      const filtered: Food[] = [];
+
+      for (const elementOfAll of all) {
+        if (
+          !existing.some(
+            (elementOfExisting) => elementOfExisting.id === elementOfAll.id
+          )
+        ) {
+          filtered.push(elementOfAll);
+        }
+      }
+
+      return filtered;
+    }
+
+    return possibleToChoose[randomIndex];
   }
 
   generate() {
@@ -192,29 +208,3 @@ class FoodGenerator {
 }
 
 export default FoodGenerator;
-
-function getMissingElements(firstArray: Food[], secondArray: Food[]): Food[] {
-  const missingElements: Food[] = [];
-  for (const element of firstArray) {
-    if (!secondArray.some((item) => item.id === element.id)) {
-      missingElements.push(element);
-    }
-  }
-
-  return missingElements;
-}
-
-function getRepeatedElements(
-  firstArray: FoodType[],
-  secondArray: FoodType[]
-): FoodType[] {
-  const repeatedEleements: FoodType[] = [];
-
-  for (const element of firstArray) {
-    if (secondArray.some((item) => item.id === element.id)) {
-      repeatedEleements.push(element);
-    }
-  }
-
-  return repeatedEleements;
-}

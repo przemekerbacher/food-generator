@@ -15,7 +15,7 @@ class Storage<T extends { id: string }> {
   constructor(config: Config) {
     this.config = config;
     this.api = axios.create({
-      baseURL: `https://localhost:44331/${this.config.controller}`,
+      baseURL: `/${this.config.controller}`,
     });
   }
 
